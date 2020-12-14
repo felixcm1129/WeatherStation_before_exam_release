@@ -139,8 +139,14 @@
   <data name="language" xml:space="preserve">
     <value>Change Language</value>
   </data>
+  <data name="open_file" xml:space="preserve">
+    <value>Open file...</value>
+  </data>
   <data name="preferences" xml:space="preserve">
     <value>Preferences...</value>
+  </data>
+  <data name="save_file" xml:space="preserve">
+    <value>Save file as...</value>
   </data>
   <data name="settings" xml:space="preserve">
     <value>Settings</value>

@@ -58,6 +58,8 @@ namespace WeatherApp.ViewModels
         /// </summary>
         public DelegateCommand<string> ChangePageCommand { get; set; }
         public DelegateCommand<string> ChangeLanguageCommand { get; private set; }
+        public DelegateCommand<string> OpenFileCommand { get; private set; }
+        public DelegateCommand<string> SaveFileCommand { get; private set; }
 
 
         public List<BaseViewModel> ViewModels
@@ -74,6 +76,9 @@ namespace WeatherApp.ViewModels
         {
             ChangePageCommand = new DelegateCommand<string>(ChangePage);
             ChangeLanguageCommand = new DelegateCommand<string>(ChangeLanguage);
+            OpenFileCommand = new DelegateCommand<string>(Import);
+            SaveFileCommand = new DelegateCommand<string>(Export);
+            ows = new OpenWeatherService(Properties.Settings.Default.apiKey);
 
             initViewModels();
 
@@ -97,7 +102,8 @@ namespace WeatherApp.ViewModels
             if (string.IsNullOrEmpty(Properties.Settings.Default.apiKey) && apiKey == "")
             {
                 tvm.RawText = "Aucune clé API, veuillez la configurer";
-            } else
+            } 
+            else
             {
                 if (apiKey == "")
                     apiKey = Properties.Settings.Default.apiKey;
@@ -145,19 +151,28 @@ namespace WeatherApp.ViewModels
                 saveFileDialog = new VistaSaveFileDialog();
                 saveFileDialog.Filter = "Json file|*.json|All files|*.*";
                 saveFileDialog.DefaultExt = "json";
+                saveFileDialog.ShowDialog();
+                Filename = saveFileDialog.FileName;
+                saveToFile();
             }
 
         }
 
         private void saveToFile()
         {
-
-
+            using (var tw = new StreamWriter(Filename, false))
+            {
+                tw.WriteLine(tvm.RawText);
+                tw.Close();
+            }
         }
 
         private void openFromFile()
         {
-
+            using (var sr = new StreamReader(Filename))
+            {
+                tvm.RawText += sr.ReadToEnd();
+            }
         }
 
         private void Import(string obj)
@@ -167,8 +182,9 @@ namespace WeatherApp.ViewModels
                 openFileDialog = new VistaOpenFileDialog();
                 openFileDialog.Filter = "Json file|*.json|All files|*.*";
                 openFileDialog.DefaultExt = "json";
-
-
+                openFileDialog.ShowDialog();
+                Filename = openFileDialog.FileName;
+                openFromFile();
             }
         }
 

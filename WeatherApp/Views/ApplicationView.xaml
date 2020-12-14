@@ -31,6 +31,8 @@
                 <Separator />
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.settings}">
+                <MenuItem Header="{x:Static p:Resources.open_file}" Command="{Binding OpenFileCommand}"/>
+                <MenuItem Header="{x:Static p:Resources.save_file}" Command="{Binding SaveFileCommand}"/>
                 <MenuItem Header="{x:Static p:Resources.language}">
                     <MenuItem Header="Français" Command="{Binding ChangeLanguageCommand}" CommandParameter="fr"/>
                     <MenuItem Header="English" Command="{Binding ChangeLanguageCommand}" CommandParameter="en"/>

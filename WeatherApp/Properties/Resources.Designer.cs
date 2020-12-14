@@ -125,11 +125,29 @@ namespace WeatherApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open file....
+        /// </summary>
+        public static string open_file {
+            get {
+                return ResourceManager.GetString("open_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preferences....
         /// </summary>
         public static string preferences {
             get {
                 return ResourceManager.GetString("preferences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save file as....
+        /// </summary>
+        public static string save_file {
+            get {
+                return ResourceManager.GetString("save_file", resourceCulture);
             }
         }
         

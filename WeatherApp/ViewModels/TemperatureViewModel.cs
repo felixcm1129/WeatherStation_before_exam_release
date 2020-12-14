@@ -71,7 +71,7 @@ namespace WeatherApp.ViewModels
 
         public TemperatureViewModel()
         {
-            Name = this.GetType().Name;
+            Name = GetType().Name;
             Temperatures = new ObservableCollection<TemperatureModel>();
 
             GetTempCommand = new DelegateCommand<string>(GetTemp, CanGetTemp);
@@ -80,8 +80,11 @@ namespace WeatherApp.ViewModels
 
         public bool CanGetTemp(string obj)
         {
-            if (TemperatureService == null) return false;
-            else return true;
+            if (Properties.Settings.Default.apiKey == "")
+            {
+                return false;
+            }
+            else return TemperatureService != null;
         }
 
         public void GetTemp(string obj)
