@@ -33,8 +33,9 @@ namespace WeatherStationTests
         {
             // Arrange
             _sut = new TemperatureViewModel();
+            expected = 20 * 9.0 / 5.0 + 32; //68
             // Act       
-            double actual = _sut.CelsiusInFahrenheit(C);
+            double actual = _sut.CelsiusInFahrenheit(20);
             
             // Assert
             Assert.Equal(expected, actual, 1);
