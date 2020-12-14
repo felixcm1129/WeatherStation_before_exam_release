@@ -3,10 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="apiKey" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">8a2bcea8def273e610d7c418516de955</Value>
     </Setting>
     <Setting Name="cities" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">en-US</Value>
     </Setting>
   </Settings>
 </SettingsFile>

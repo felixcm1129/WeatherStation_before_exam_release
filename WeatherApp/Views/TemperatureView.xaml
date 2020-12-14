@@ -5,14 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WeatherApp.Views"
              xmlns:models="clr-namespace:WeatherApp.Models"
+             xmlns:p="clr-namespace:WeatherApp.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400">
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
-            <TextBlock Text="City : "/>
+            <TextBlock Text="{x:Static p:Resources.city}"/>
             <TextBox Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
         </ToolBar>
-        <Button DockPanel.Dock="Top" Content="Get Data" Command="{Binding GetTempCommand}"/>
+        <Button DockPanel.Dock="Top" Content="{x:Static p:Resources.btn_get_data}" Command="{Binding GetTempCommand}"/>
 
         <TextBlock Text="{Binding RawText}"/>
 

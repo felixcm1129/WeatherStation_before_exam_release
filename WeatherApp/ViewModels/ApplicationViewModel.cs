@@ -1,7 +1,10 @@
 ﻿using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Windows;
 using WeatherApp.Commands;
 using WeatherApp.Services;
 
@@ -54,6 +57,7 @@ namespace WeatherApp.ViewModels
         /// Commande pour changer la page à afficher
         /// </summary>
         public DelegateCommand<string> ChangePageCommand { get; set; }
+        public DelegateCommand<string> ChangeLanguageCommand { get; private set; }
 
 
         public List<BaseViewModel> ViewModels
@@ -69,6 +73,7 @@ namespace WeatherApp.ViewModels
         public ApplicationViewModel()
         {
             ChangePageCommand = new DelegateCommand<string>(ChangePage);
+            ChangeLanguageCommand = new DelegateCommand<string>(ChangeLanguage);
 
             initViewModels();
 
@@ -170,9 +175,25 @@ namespace WeatherApp.ViewModels
         private void ChangeLanguage(string language)
         {
 
+            Properties.Settings.Default.Language = language;
+            Properties.Settings.Default.Save();
+
+            if (MessageBox.Show(
+                    "Please restart app for the settings to take effect.\nWould you like to restart?",
+                    "Warning!",
+                    MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                Restart();
+        }
+
+        void Restart()
+        {
+            var filename = Application.ResourceAssembly.Location;
+            var newFile = Path.ChangeExtension(filename, ".exe");
+            Process.Start(newFile);
+            Application.Current.Shutdown();
         }
 
         #endregion
-        
+
     }
 }
