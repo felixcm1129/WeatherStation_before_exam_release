@@ -81,7 +81,7 @@ namespace WeatherApp.ViewModels
         public bool CanGetTemp(string obj)
         {
             if (TemperatureService == null) return false;
-            else return TemperatureService != null;
+            else return true;
         }
 
         public void GetTemp(string obj)
